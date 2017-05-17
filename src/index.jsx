@@ -1,12 +1,8 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
-import fetch from 'isomorphic-fetch';
-import autobind from 'autobind-decorator';
 import classnames from 'classnames';
 import Dropzone from 'react-dropzone';
 import Button from 'react-progress-button';
-import 'babel-core/register';
-import 'babel-polyfill';
 
 export default class ImagesUploader extends Component {
 	/* eslint-disable react/sort-comp */
@@ -92,6 +88,16 @@ export default class ImagesUploader extends Component {
 
 	constructor(props: Object) {
 		super(props);
+
+		this.deleteImage = this.deleteImage.bind(this)
+		this.buildPreviews = this.buildPreviews.bind(this)
+		this.loadImages = this.loadImages.bind(this).bind(this)
+		this.handleFileDrop = this.handleFileDrop.bind(this)
+		this.buildButtonContent = this.buildButtonContent.bind(this)
+		this.buildClose = this.buildClose.bind(this)
+		this.showNotification = this.showNotification.bind(this)
+		this.hideNotification = this.hideNotification.bind(this)
+
 		let imagePreviewUrls = [];
 		if (this.props.images && this.props.multiple !== false) {
 			imagePreviewUrls = this.props.images || [];
@@ -133,7 +139,6 @@ export default class ImagesUploader extends Component {
 		}
 	}
 
-	@autobind
 	deleteImage(key: number) {
 		if (!this.props.disabled) {
 			const imagePreviewUrls = this.state.imagePreviewUrls;
@@ -147,7 +152,6 @@ export default class ImagesUploader extends Component {
 		}
 	}
 
-	@autobind
 	buildPreviews(urls: Array<string>, optimisticUrls?: Array<string>, inButton?: boolean) {
 		const {
 			classNamespace,
@@ -289,7 +293,6 @@ export default class ImagesUploader extends Component {
 		return previews;
 	}
 
-	@autobind
 	async loadImages(files: FileList, url: string, onLoadEnd?: Function): any {
 		if (url) {
 			try {
@@ -362,7 +365,6 @@ export default class ImagesUploader extends Component {
 		}
 	}
 
-	@autobind
 	handleImageChange(e: Object) {
 		e.preventDefault();
 
@@ -434,7 +436,6 @@ export default class ImagesUploader extends Component {
 		}
 	}
 
-	@autobind
 	handleFileDrop(files: FileList) {
 		if (!this.props.disabled) {
 			this.handleImageChange({
@@ -477,7 +478,6 @@ export default class ImagesUploader extends Component {
 	}
 	/* eslint-enable max-len, no-undef */
 
-	@autobind
 	buildButtonContent() {
 		const {
 			multiple,
@@ -520,7 +520,6 @@ export default class ImagesUploader extends Component {
 		return this.buildPreviews(imagePreviewUrls, optimisticPreviews, true);
 	}
 
-	@autobind
 	buildClose() {
 		const {
 			multiple,
@@ -575,7 +574,6 @@ export default class ImagesUploader extends Component {
 		</div>);
 	}
 
-	@autobind
 	showNotification() {
 		const { multiple, disabled } = this.props;
 		const { imagePreviewUrls } = this.state;
@@ -586,7 +584,6 @@ export default class ImagesUploader extends Component {
 		}
 	}
 
-	@autobind
 	hideNotification() {
 		const { multiple } = this.props;
 		if (multiple === false) {
