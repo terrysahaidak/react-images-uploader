@@ -89,14 +89,15 @@ export default class ImagesUploader extends Component {
 	constructor(props: Object) {
 		super(props);
 
-		this.deleteImage = this.deleteImage.bind(this)
-		this.buildPreviews = this.buildPreviews.bind(this)
-		this.loadImages = this.loadImages.bind(this).bind(this)
-		this.handleFileDrop = this.handleFileDrop.bind(this)
-		this.buildButtonContent = this.buildButtonContent.bind(this)
-		this.buildClose = this.buildClose.bind(this)
-		this.showNotification = this.showNotification.bind(this)
-		this.hideNotification = this.hideNotification.bind(this)
+		this.deleteImage = this.deleteImage.bind(this);
+		this.buildPreviews = this.buildPreviews.bind(this);
+		this.loadImages = this.loadImages.bind(this).bind(this);
+		this.handleFileDrop = this.handleFileDrop.bind(this);
+		this.buildButtonContent = this.buildButtonContent.bind(this);
+		this.buildClose = this.buildClose.bind(this);
+		this.showNotification = this.showNotification.bind(this);
+		this.hideNotification = this.hideNotification.bind(this);
+		this.handleImageChange = this.handleImageChange.bind(this);
 
 		let imagePreviewUrls = [];
 		if (this.props.images && this.props.multiple !== false) {
